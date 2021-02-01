@@ -8,4 +8,10 @@ class Employee < ActiveRecord::Base
     less_than_or_equal_to: 200 
   }
   validates_associated :store
+  before_create :set_password
+
+  private
+  def set_password
+    self.password = (0...8).map { (65 + rand(26)).chr }.join
+  end
 end
